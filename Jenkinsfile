@@ -7,6 +7,12 @@ pipeline {
                 git 'https://github.com/jasamoahf/E2E_DEVOPS.git'
             }
         }
+        stage('Docker Pre-Check') {
+            steps {
+                sh 'docker --version'
+                sh 'docker ps || true'
+            }
+        }
 
         stage('Build & Test Docker Image') {
             steps {
