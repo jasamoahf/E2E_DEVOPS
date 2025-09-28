@@ -36,6 +36,9 @@ pipeline {
 
                     // always show logs for debugging
                     sh 'docker logs app-ci-test || true'
+                    // show logs for flask debugging
+                    sh 'docker logs app-ci-test'
+
                     // Verify endpoint works
                     sh 'curl -f http://localhost:5000'
 
