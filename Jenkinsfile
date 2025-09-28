@@ -27,7 +27,7 @@ pipeline {
                     sh 'docker rm -f app-ci-test || true'
 
                     // run new container
-                    sh 'docker run -d -p 5000:5000 --name app-ci-test e2e-devops:${BUILD_NUMBER}'
+                    sh 'docker run -d -p 5000:5000 --name app-ci-test e2e-devops:latest'
 
                     // wait and retry curl
                     retry(3) {
