@@ -26,12 +26,16 @@ pipeline {
                     // Clean up old container if it exists
                     sh 'docker rm -f app-ci-test || true'
 
-                    // Run a new container with fixed name
-                    sh 'docker run -d -p 5000:5000 --name app-ci-test e2e-devops:${BUILD_NUMBER}'
+                    // run new container
+                    sh 'docker run -d -p 5000:5000 --name app-ci-test e2e-devops:1'
 
-                    // Wait for app to start
-                    sh 'sleep 5'
+                    // wait and retry curl
+                    retry(3) {
+                        sh 'sleep 5 && curl -f http://localhost:5000'
+                    }
 
+                    // always show logs for debugging
+                    sh 'docker logs app-ci-test || true'
                     // Verify endpoint works
                     sh 'curl -f http://localhost:5000'
 
