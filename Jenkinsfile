@@ -44,7 +44,9 @@ pipeline {
                     sh 'docker logs app-ci-test'
 
                     // Verify endpoint works
-                    sh 'curl -f http://localhost:5000'
+                    sh 'curl -f http://host.docker.internal:5000'
+
+                   // sh 'curl -f http://localhost:5000'
 
                     // Clean up
                     sh 'docker stop app-ci-test'
