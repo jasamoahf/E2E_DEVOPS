@@ -32,7 +32,7 @@ pipeline {
                     // wait and retry curl
                     retry(3) {
                        sh '''
-                            sleep 10
+                            sleep 5
                             docker exec app-ci-test curl -f http://localhost:5000
                         '''
                        // sh 'sleep 5 && curl -f http://localhost:5000'
